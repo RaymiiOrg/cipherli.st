@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/Article">
+<head>
+  <meta property="og:image" content="https://cipherli.st/img/favicon.png">
+  <meta property="og:title" content="Cipherli.st - Strong ciphers for Apache, NGINX and Lighttpd">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cipherli.st/">
+  <meta charset="utf-8">
+  <title>Cipherli.st - Strong Ciphers for Apache, NGINX and Lighttpd</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cipherli.st - Strong ciphers for Apache, NGINX and Lighttpd">
+  <meta name="author" content="Remy van Elst">
+  <link rel="apple-touch-icon" href="img/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" href="img/favicon.png" />
+	
+	<link href="img/favicon.png" rel="icon" type="image/png" > 
+	<link href="css/bootstrap.min.css" rel="stylesheet"> 
+	<link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <a id="top-of-page"></a>
+    <div class="container-fluid ">
+        <div class="row"><div class="col-md-10 col-md-offset-1">
+			<div class="page-header" >
+				<h1>
+                    <img class="pull-left" src="img/lock.png" width="50" height="70" alt="Cute" /><br />Cipherli.st 
+			<small>Strong Ciphers for Apache, NGINX and Lighttpd</small>
+				</h1>
+			</div>
+		    <div class="col-md-4 column">
+            <h2>Apache</h2>
+            <pre class="pre-trans">
+SSLCipherSuite ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4
+SSLProtocol All -SSLv2 -SSLv3
+SSLCompression off
+SSLHonorCipherOrder On
+SSLUseStapling on
+SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
+Header always set Strict-Transport-Security "max-age=63072000; <i>includeSubDomains</i>"
+Header always set X-Frame-Options DENY
+            </pre><br />
+            <a href="https://raymii.org/s/tutorials/Strong_SSL_Security_On_Apache2.html">Comprehensive tutorial on Strong SSL Security on Apache</a>
+            </div>
+		    <div class="col-md-4 column">
+            <h2>NGINX</h2>
+				<pre class="pre-trans">
+ssl_ciphers 'ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4';
+ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+ssl_prefer_server_ciphers on;
+ssl_session_cache  builtin:1000  shared:SSL:10m;
+add_header Strict-Transport-Security "max-age=63072000; <i>includeSubDomains</i>"
+add_header X-Frame-Options DENY;
+ssl_stapling on;
+ssl_stapling_verify on;
+resolver <i>$DNS-IP-1 $DNS-IP-2</i> valid=300s;
+resolver_timeout 5s;
+                </pre><br />
+            <a href="https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html">Comprehensive tutorial on Strong SSL Security on NGINX</a>
+            </div>
+		    <div class="col-md-4 column">
+            <h2>Lighttpd</h2>
+				<pre class="pre-trans">
+ssl.honor-cipher-order = "enable"
+ssl.cipher-list = "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4"
+ssl.use-compression = "disable"
+setenv.add-response-header = ("Strict-Transport-Security" =&gt; "max-age=63072000; <i>includeSubDomains</i>")
+setenv.add-response-header = ("X-Frame-Options" =&gt; "DENY")
+ssl.use-sslv2 = "disable"
+ssl.use-sslv3 = "disable"
+            </pre><br />
+            <a href="https://raymii.org/s/tutorials/Strong_SSL_Security_On_lighttpd.html">Comprehensive tutorial on Strong SSL Security on Lighttpd</a>
+            </div>
+            </div>
+            </div>
+            <div class="col-md-10 col-md-offset-1">
+		<h2>Warning</h2>
+		These examples are meant for sysadmins who have done this before (and sysadmins are forced to support Windows XP with IE &lt; 9, therefore des3cbc), as an easily copy-pastable example, not for newbies who have no idea what all this means. The settings are very secure, but if you don't know what you are doing might make your website and subdomains <strong>unavailable for a long, long time</strong> (see <a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security">HSTS</a>). Research what you are doing and think before you act. Hier niet poepen zegmaar. <br />
+		<strong>Other suggestions</strong>
+		<ul>
+		<li>sha256 certificates</li>
+		<li>4096-bit private key</li>
+		<li>&gt;2048 DH Pool size</li>
+		</ul>	
+			<h2>Why?</h2>
+		<a href="https://www.ssllabs.com/ssltest/analyze.html?d=cipherli.st"><img src="img/a-plus.png" alt="A+ JAAAAAAAAAA" class="pull-right"/></a>
+			  The above ciphers are Copy Pastable in your NGINX, Lighttpd or Apache config. These provide Strong SSL Security for all modern browsers, plus you get an A+ on the <a href="https://www.ssllabs.com/ssltest/analyze.html?d=cipherli.st">SSL Labs Test</a>. In short, they set a strong Forward Secrecy enabled ciphersuite, they disable SSLv2 and SSLv3, add HTTP Strict Transport Security and X-Frame-Deny headers and enable OCSP Stapling (except on Lighttpd, it does not support that yet).
+            <br />Cipherli.st is made by <a href="https://raymii.org">Raymii.org</a> &amp; <a href="http://tnx.nl">Juerd</a>  after the idea spawned at a <a href="https://privacycafe.nl/">Privacy Cafe</a> at <a href="https://revspace.nl">Revspace</a>. The image is Public Domain from <a href="https://commons.wikimedia.org/wiki/File:Heart-padlock.svg">here</a>. Feedback <a href="https://raymii.org/s/static/About.html#contact">here please</a>.
+   			<div class="row" style="clear: both;">
+				<div class="col-md-4 column">
+				<h3>Tweet</h3>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://cipherli.st" data-text="Enable strong SSL Security on your site with Cipherli.st " data-size="large" data-count="none" data-hashtags="cipherlist" data-dnt="true">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+				<div class="col-md-4 column">
+				  <h3>Facebook</h3>
+				  <a href="https://www.facebook.com/sharer.php?u=https://cipherli.st">
+				  	<img src="img/dislike.png" width="150" height="80" alt="dislike this on facebook" />
+				  </a>
+				</div>
+				<div class="col-md-4 column">
+				 <h3>Google+</h3>
+					<a href="https://plus.google.com/share?url=https://cipherli.st">
+					  <img src="img/plus.png" width="80" height="80" alt="share on Gplus" />
+					</a>
+				</div>
+			</div>
+			<hr />	
+		</div>
+	</div>
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://hosted-oswa.org/piwik/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 33]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+    g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="http://hosted-oswa.org/piwik/piwik.php?idsite=33" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik pre -->
+</body>
+</html>
