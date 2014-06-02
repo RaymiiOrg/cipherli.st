@@ -41,7 +41,7 @@ SSLStaplingCache "shmcb:logs/stapling-cache(150000)" # Requires Apache 2.4
 Header always set Strict-Transport-Security "max-age=63072000; <i>includeSubDomains</i>"
 Header always set X-Frame-Options DENY
             </pre><br />
-            <a href="https://raymii.org/s/tutorials/Strong_SSL_Security_On_Apache2.html">Comprehensive tutorial on Strong SSL Security on Apache</a>
+            <a href="https://raymii.org/s/tutorials/Strong_SSL_Security_On_Apache2.html">Rationale and tutorial on Strong SSL Security on Apache</a>
             </div>
 		    <div class="col-md-4 column">
             <h2>NGINX</h2>
@@ -57,7 +57,7 @@ ssl_stapling_verify on;
 resolver <i>$DNS-IP-1 $DNS-IP-2</i> valid=300s;
 resolver_timeout 5s;
                 </pre><br />
-            <a href="https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html">Comprehensive tutorial on Strong SSL Security on NGINX</a>
+            <a href="https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html">Rationale and tutorial on Strong SSL Security on NGINX</a>
             </div>
 		    <div class="col-md-4 column">
             <h2>Lighttpd</h2>
@@ -70,7 +70,7 @@ setenv.add-response-header = ("X-Frame-Options" =&gt; "DENY")
 ssl.use-sslv2 = "disable"
 ssl.use-sslv3 = "disable"
             </pre><br />
-            <a href="https://raymii.org/s/tutorials/Strong_SSL_Security_On_lighttpd.html">Comprehensive tutorial on Strong SSL Security on Lighttpd</a>
+            <a href="https://raymii.org/s/tutorials/Strong_SSL_Security_On_lighttpd.html">Rationale and tutorial on Strong SSL Security on Lighttpd</a>
             </div>
             </div>
             </div>
