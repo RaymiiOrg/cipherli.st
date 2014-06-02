@@ -36,8 +36,8 @@ SSLCipherSuite ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-A
 SSLProtocol All -SSLv2 -SSLv3
 SSLCompression off
 SSLHonorCipherOrder On
-SSLUseStapling on
-SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
+SSLUseStapling on # Requires Apache 2.4
+SSLStaplingCache "shmcb:logs/stapling-cache(150000)" # Requires Apache 2.4
 Header always set Strict-Transport-Security "max-age=63072000; <i>includeSubDomains</i>"
 Header always set X-Frame-Options DENY
             </pre><br />
