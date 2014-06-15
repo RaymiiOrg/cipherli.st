@@ -99,8 +99,10 @@ resolver_timeout 5s;
 ssl.honor-cipher-order = "enable"
 ssl.cipher-list = "AES256+EECDH:AES256+EDH:!aNULL"
 ssl.use-compression = "disable"
-setenv.add-response-header = ("Strict-Transport-Security" =&gt; "max-age=63072000; <i>includeSubDomains</i>")
-setenv.add-response-header = ("X-Frame-Options" =&gt; "DENY")
+setenv.add-response-header = (
+    "Strict-Transport-Security" =&gt; "max-age=63072000; <i>includeSubDomains</i>",
+    "X-Frame-Options" =&gt; "DENY"
+)
 ssl.use-sslv2 = "disable"
 ssl.use-sslv3 = "disable"
             </pre><br />
