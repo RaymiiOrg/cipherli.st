@@ -67,7 +67,7 @@
 		    <div class="col-md-4 column">
             <h2>Apache</h2>
             <pre class="pre-trans" id="apacheconfig">
-SSLCipherSuite AES256+EECDH:AES256+EDH:!aNULL
+SSLCipherSuite AES256+EECDH:AES256+EDH
 SSLProtocol All -SSLv2 -SSLv3
 SSLCompression off
 SSLHonorCipherOrder On
@@ -81,7 +81,7 @@ Header always set X-Frame-Options DENY
 		    <div class="col-md-4 column">
             <h2>nginx</h2>
 				<pre class="pre-trans" id="nginxconfig">
-ssl_ciphers 'AES256+EECDH:AES256+EDH:!aNULL';
+ssl_ciphers 'AES256+EECDH:AES256+EDH';
 ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 ssl_prefer_server_ciphers on;
 ssl_session_cache  builtin:1000  shared:SSL:10m;
@@ -97,7 +97,7 @@ resolver_timeout 5s;
             <h2>Lighttpd</h2>
 				<pre class="pre-trans" id="lighttpdconfig">
 ssl.honor-cipher-order = "enable"
-ssl.cipher-list = "AES256+EECDH:AES256+EDH:!aNULL"
+ssl.cipher-list = "AES256+EECDH:AES256+EDH"
 ssl.use-compression = "disable"
 setenv.add-response-header = (
     "Strict-Transport-Security" =&gt; "max-age=63072000; <i>includeSubDomains</i>",
@@ -123,7 +123,7 @@ ssl.use-sslv3 = "disable"
             </div>
             <div class="col-md-10 col-md-offset-1" id="oldcrap">
                 <br >
-                <p>Do you need to (or are forced to) support old / legacy software like IE &lt; 9, Android &lt; 2.2 or Java &lt; 6? <a href="#" onclick="JavaScript:oldCrap();">Yes, give me a ciphersuite that works with legacy / old software.</a></p>
+                <p>Do you need to (or are forced to) support old / legacy software like IE &lt; 9, Android &lt; 2.2 or Java &lt; 6? <a href="#" onclick="JavaScript:oldCrap(); return false;">Yes, give me a ciphersuite that works with legacy / old software.</a></p>
             </div>
             <div class="col-md-10 col-md-offset-1">
 		<h2>Warning</h2>
@@ -137,7 +137,7 @@ ssl.use-sslv3 = "disable"
 			<h2>Why?</h2>
 		<a href="https://www.ssllabs.com/ssltest/analyze.html?d=cipherli.st"><img src="img/a-plus.png" alt="A+ JAAAAAAAAAA" class="pull-right"/></a>
 			  The above ciphers are Copy Pastable in your nginx, Lighttpd or Apache config. These provide Strong SSL Security for all modern browsers, plus you get an A+ on the <a href="https://www.ssllabs.com/ssltest/analyze.html?d=cipherli.st">SSL Labs Test</a>. In short, they set a strong Forward Secrecy enabled ciphersuite, they disable SSLv2 and SSLv3, add HTTP Strict Transport Security and X-Frame-Deny headers and enable OCSP Stapling (except on Lighttpd, it does not support that yet).
-              <br />Using IIS? Check out <a href="https://www.nartac.com/Products/IISCrypto/Default.aspx">IIS Crypto</a>.
+              <br />Using IIS? Check out <a href="https://www.nartac.com/Products/IISCrypto/Default.aspx">IIS Crypto</a>. Other software like Zeus, HAProxy? Detailed info? Read the [Mozilla Page](https://wiki.mozilla.org/Security/Server_Side_TLS).
               <br />Cipherli.st is made by <a href="https://raymii.org">Raymii.org</a> &amp; <a href="http://tnx.nl">Juerd</a>  after the idea spawned at a <a href="https://privacycafe.nl/">Privacy Cafe</a> at <a href="https://revspace.nl">Revspace</a>. The image is Public Domain from <a href="https://commons.wikimedia.org/wiki/File:Heart-padlock.svg">here</a>. Feedback <a href="https://raymii.org/s/static/About.html#contact">here please</a>. Source code <a href="https://github.com/RaymiiOrg/cipherli.st" >here</a>.
    			<div class="row" style="clear: both;">
 				<div class="col-md-4 column">
