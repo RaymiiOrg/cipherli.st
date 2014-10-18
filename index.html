@@ -26,6 +26,7 @@
       document.getElementById("apacheconfig").innerHTML += 'SSLStaplingCache "shmcb:logs/stapling-cache(150000)\" # Requires >= Apache 2.4\n';
       document.getElementById("apacheconfig").innerHTML += 'Header always set Strict-Transport-Security "max-age=63072000; <i>includeSubDomains</i>"\n';
       document.getElementById("apacheconfig").innerHTML += 'Header always set X-Frame-Options DENY\n';
+      document.getElementById("apacheconfig").innerHTML += 'Header always set X-Content-Type-Options nosniff\n';
 
 
       document.getElementById("nginxconfig").innerHTML = 'ssl_ciphers "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4";\n';
@@ -34,6 +35,7 @@
       document.getElementById("nginxconfig").innerHTML += 'ssl_session_cache shared:SSL:10m;\n';
       document.getElementById("nginxconfig").innerHTML += 'add_header Strict-Transport-Security "max-age=63072000; <i>includeSubDomains</i>";\n';
       document.getElementById("nginxconfig").innerHTML += 'add_header X-Frame-Options DENY;\n';
+      document.getElementById("nginxconfig").innerHTML += 'add_header X-Content-Type-Options nosniff;\n';
       document.getElementById("nginxconfig").innerHTML += 'ssl_stapling on; # Requires nginx >= 1.3.7\n';
       document.getElementById("nginxconfig").innerHTML += 'ssl_stapling_verify on; # Requires nginx => 1.3.7\n';
       document.getElementById("nginxconfig").innerHTML += 'resolver <i>$DNS-IP-1 $DNS-IP-2</i> valid=300s;\n';
@@ -45,6 +47,7 @@
       document.getElementById("lighttpdconfig").innerHTML += 'ssl.use-compression = "disable"\n';
       document.getElementById("lighttpdconfig").innerHTML += 'setenv.add-response-header = ("Strict-Transport-Security" =&gt; "max-age=63072000; <i>includeSubDomains</i>")\n';
       document.getElementById("lighttpdconfig").innerHTML += 'setenv.add-response-header = ("X-Frame-Options" =&gt; "DENY")\n';
+      document.getElementById("lighttpdconfig").innerHTML += 'setenv.add-response-header = (X-Content-Type-Options" =&gt; "nosniff")\n';
       document.getElementById("lighttpdconfig").innerHTML += 'ssl.use-sslv2 = "disable"\n';
       document.getElementById("lighttpdconfig").innerHTML += 'ssl.use-sslv3 = "disable"\n';
 
