@@ -161,6 +161,148 @@ ssl.use-sslv3 = "disable"
 			<hr />	
 		</div>
 	</div>
+
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Other Software</h2>
+      
+        <p><a href="https://github.com/RaymiiOrg/cipherli.st">Pull requests for other software welcome</a></p>
+
+
+      <div class="col-md-6 column">
+        <h2>haproxy</h2>
+        <pre class="pre-trans" id="haproxyconfig">
+global
+   ssl-default-bind-options no-sslv3 no-tls-tickets force-tlsv12
+   ssl-default-bind-ciphers AES256+EECDH:AES256+EDH
+
+frontend http-in
+      mode http
+      option httplog
+      option forwardfor
+      option http-server-close
+      option httpclose
+      bind 192.0.2.10:80
+      redirect scheme https code 301 if !{ ssl_fc }
+
+frontend https-in
+    option httplog
+    option forwardfor
+    option http-server-close
+    option httpclose
+    rspadd Strict-Transport-Security:\ max-age=31536000;\ includeSubDomains
+    rspadd X-Frame-Option:\ DENY
+    bind 192.0.2.10:443 ssl crt /etc/haproxy/haproxy.pem ciphers AES256+EECDH:AES256+EDH force-tlsv12 no-sslv3
+        </pre>
+        <br />
+      </div>
+
+
+      <div class="col-md-6 column">
+        <h2>Postfix</h2>
+        <pre class="pre-trans" id="postfixconfig">
+smtpd_use_tls=yes
+smtpd_tls_security_level = may
+smtpd_tls_auth_only = yes
+smtpd_tls_cert_file=/etc/ssl/postfix.cert
+smtpd_tls_key_file=/etc/ssl/postfix.key
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtpd_tls_mandatory_protocols = !SSLv2,!SSLv3,!TLSv1,!TLSv1.1
+smtp_tls_mandatory_ciphers = medium
+tls_medium_cipherlist = AES256+EECDH:AES256+EDH
+        </pre>
+        <br />
+      </div>
+
+
+      <div class="col-md-6 column">
+        <h2>Exim</h2>
+        <pre class="pre-trans" id="eximconfig">
+tls_certificate = /etc/exim.cert
+tls_privatekey = /etc/exim.key
+tls_advertise_hosts = *
+tls_require_ciphers = AES256+EECDH:AES256+EDH
+openssl_options = +no_sslv2 +no_sslv3
+        </pre>
+        <br />
+      </div>
+      
+      <hr>
+
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+
+      <div class="col-md-6 column">
+        <h2>ProFTPd</h2>
+        <pre class="pre-trans" id="proftpdconfig">
+TLSEngine on
+TLSLog /var/ftpd/tls.log
+TLSProtocol TLSv1.2
+TLSRequired on
+TLSCipherSuite AES256+EECDH:AES256+EDH
+TLSRSACertificateFile /etc/proftpd.cert
+TLSRSACertificateKeyFile /etc/proftpd.key
+        </pre>
+        <br />
+      </div>
+      
+      <div class="col-md-6 column">
+        <h2>Dovecot</h2>
+        <pre class="pre-trans" id="dovecotconfig">
+ssl = yes
+ssl_cert = &lt;/etc/dovecot.cert
+ssl_key = &lt;/etc/dovecot.key
+ssl_cipher_list = AES256+EECDH:AES256+EDH
+        </pre>
+        <br />
+      </div>
+
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+
+
+      <div class="col-md-6 column">
+        <h2>MySQL</h2>
+        <pre class="pre-trans" id="mysqlconfig">
+[mysqld]
+ssl-ca=/etc/mysql-ssl/ca-cert.pem
+ssl-cert=/etc/mysql-ssl/server-cert.pem
+ssl-key=/etc/mysql-ssl/server-key.pem
+ssl-cipher=AES256+EECDH:AES256+EDH
+# replication:
+GRANT REPLICATION SLAVE ON *.* to ‘repl’@’%’ REQUIRE SSL;
+STOP SLAVE;
+CHANGE MASTER MASTER_SSL=1,
+MASTER_SSL_CA=’/etc/mysql-ssl/ca-cert.pem’,
+MASTER_SSL_CERT=’/etc/mysql-ssl/client-cert.pem’,
+MASTER_SSL_KEY=’/etc/mysql-ssl/client-key.pem';
+SHOW SLAVE STATUS\G;
+START SLAVE;
+SHOW SLAVE STATUS\G;
+        </pre>
+        <br />
+      </div>
+
+
+
+      <div class="col-md-6 column">
+        <h2>DirectAdmin</h2>
+        <pre class="pre-trans" id="directadminconfig">
+ssl_cipher=AES256+EECDH:AES256+EDH
+SSL=1
+cacert=/usr/local/directadmin/conf/cacert.pem
+cakey=/usr/local/directadmin/conf/cakey.pem
+carootcert=/usr/local/directadmin/conf/carootcert.pem
+        </pre>
+        <br />
+      </div>
+
 <!-- Piwik -->
 <script type="text/javascript">
   var _paq = _paq || [];
