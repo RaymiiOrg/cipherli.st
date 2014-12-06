@@ -129,7 +129,7 @@ ssl.use-sslv3 = "disable"
             </div>
             <div class="col-md-10 col-md-offset-1" id="oldcrap">
                 <br >
-                <p><a href="https://z1s.org/ssl/">Test your SSL config</a>.</p>
+                <p><a href="https://z1s.org/ssl/"><h3>Test your SSL config</h3></a>.</p>
                 <p>Do you need to (or are forced to) support old / legacy software like IE &lt; 9, Android &lt; 2.2 or Java &lt; 6? <a href="#" onclick="JavaScript:oldCrap(); return false;">Yes, give me a ciphersuite that works with legacy / old software.</a></p>
             </div>
             <div class="col-md-10 col-md-offset-1">
@@ -215,6 +215,7 @@ smtpd_tls_cert_file=/etc/ssl/postfix.cert
 smtpd_tls_key_file=/etc/ssl/postfix.key
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtpd_tls_mandatory_protocols = !SSLv2,!SSLv3,!TLSv1,!TLSv1.1
+smtpd_tls_protocols=!SSLv2,!SSLv3,!TLSv1,!TLSv1.1
 smtp_tls_mandatory_ciphers = medium
 tls_medium_cipherlist = AES256+EECDH:AES256+EDH
         </pre>
@@ -262,6 +263,7 @@ TLSRSACertificateKeyFile /etc/proftpd.key
 ssl = yes
 ssl_cert = &lt;/etc/dovecot.cert
 ssl_key = &lt;/etc/dovecot.key
+ssl_protocols = !SSLv2 !SSLv3
 ssl_cipher_list = AES256+EECDH:AES256+EDH
         </pre>
         <br />
