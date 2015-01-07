@@ -326,6 +326,41 @@ password_encryption = on
         </pre>
         <br />
       </div>
+      
+      <div class="col-md-6 column">
+        <h2><a href="https://stribika.github.io/2015/01/04/secure-secure-shell.html">OpenSSH Server</a></a></h2>
+        <pre class="pre-trans" id="sshdconfig">
+Protocol 2
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostKey /etc/ssh/ssh_host_rsa_key
+KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com
+        </pre>
+        <br />
+      </div>
+      
+      <div class="col-md-6 column">
+        <h2><a href="https://stribika.github.io/2015/01/04/secure-secure-shell.html">OpenSSH Client</a></a></h2>
+        <pre class="pre-trans" id="sshconfig">
+HashKnownHosts yes
+Host github.com
+    MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512
+Host *
+  ConnectTimeout 30
+  KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+  MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
+  Ciphers aes256-gcm@openssh.com,aes128-gcm@openssh.com,chacha20-poly1305@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+  ServerAliveInterval 10
+  ControlMaster auto
+  ControlPersist yes
+  ControlPath ~/.ssh/socket-%r@%h:%p
+        </pre>
+        <br />
+      </div>
+      
+      
+      
 
 <!-- Piwik -->
 <script type="text/javascript">
