@@ -139,7 +139,7 @@ ssl.use-sslv3 = "disable"
         These examples are meant for sysadmins who have done this before (and sysadmins are forced to support Windows XP with IE &lt; 9, therefore des3cbc), as an easily copy-pastable example, not for newbies who have no idea what all this means. The settings are very secure, but if you don't know what you are doing might make your website and subdomains <strong>unavailable for a long, long time</strong> (see <a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security">HSTS</a>). Research what you are doing and think before you act. Hier niet poepen zegmaar. <br />
         <strong>Other suggestions</strong>
         <ul>
-        <li>sha128 certificates</li>
+        <li>sha256 certificates</li>
         <li>4096-bit private key</li>
         <li>&gt;2048 DH Pool size</li>
         </ul>   
@@ -333,9 +333,9 @@ password_encryption = on
 Protocol 2
 HostKey /etc/ssh/ssh_host_ed25519_key
 HostKey /etc/ssh/ssh_host_rsa_key
-KexAlgorithms curve25519-sha128@libssh.org,diffie-hellman-group-exchange-sha128
-Ciphers chacha20-poly1305@openssh.com,aes128-gcm@openssh.com,aes128-gcm@openssh.com,aes128-ctr,aes192-ctr,aes128-ctr
-MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-128-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com
+KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com
         </pre>
         <br />
       </div>
@@ -348,9 +348,9 @@ Host github.com
     MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-128-etm@openssh.com,hmac-sha2-512
 Host *
   ConnectTimeout 30
-  KexAlgorithms curve25519-sha128@libssh.org,diffie-hellman-group-exchange-sha128
-  MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-128-etm@openssh.com
-  Ciphers aes128-gcm@openssh.com,aes128-gcm@openssh.com,chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes128-ctr
+  KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+  MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com
+  Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
   ServerAliveInterval 10
   ControlMaster auto
   ControlPersist yes
