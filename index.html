@@ -205,7 +205,7 @@ frontend https-in
     option http-server-close
     option httpclose
     rspadd Strict-Transport-Security:\ max-age=31536000;\ includeSubdomains;\ preload
-    rspadd X-Frame-Option:\ DENY
+    rspadd X-Frame-Options:\ DENY
     bind 192.0.2.10:443 ssl crt /etc/haproxy/haproxy.pem ciphers AES128+EECDH:AES128+EDH force-tlsv12 no-sslv3
         </pre>
         <br />
