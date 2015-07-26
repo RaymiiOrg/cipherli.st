@@ -187,26 +187,19 @@ ssl.use-sslv3 = "disable"
         <h2>haproxy</h2>
         <pre class="pre-trans" id="haproxyconfig">
 global
-   ssl-default-bind-options no-sslv3 no-tls-tickets force-tlsv12
-   ssl-default-bind-ciphers AES128+EECDH:AES128+EDH
+  ssl-default-bind-ciphers EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
+  ssl-default-bind-options no-sslv3 no-tls-tickets
+  # tune.ssl.default-dh-param 4096 # (max 1024 for Java6/7 clients)
 
-frontend http-in
-      mode http
-      option httplog
-      option forwardfor
-      option http-server-close
-      option httpclose
-      bind 192.0.2.10:80
-      redirect scheme https code 301 if !{ ssl_fc }
+frontend https
+  bind :443 ssl crt /etc/haproxy/haproxy.pem
+  # OCSP stapling will be automatically enabled if haproxy.ocsp exists
 
-frontend https-in
-    option httplog
-    option forwardfor
-    option http-server-close
-    option httpclose
-    rspadd Strict-Transport-Security:\ max-age=31536000;\ includeSubdomains;\ preload
-    rspadd X-Frame-Options:\ DENY
-    bind 192.0.2.10:443 ssl crt /etc/haproxy/haproxy.pem ciphers AES128+EECDH:AES128+EDH force-tlsv12 no-sslv3
+  http-response set-header Strict-Transport-Security "max-age=63072000;\ includeSubdomains;\ preload"
+  http-response set-header X-Frame-Options DENY
+  http-response set-header X-Content-Type-Options nosniff
+
+# relevant hard-coded defaults: SSL_OP_NO_SSLv2 SSL_OP_NO_COMPRESSION SSL_OP_CIPHER_SERVER_PREFERENCE
         </pre>
         <br />
       </div>
