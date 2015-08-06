@@ -263,7 +263,7 @@ TLSRSACertificateKeyFile /etc/proftpd.key
         </pre>
         <br />
       </div>
-      
+
       <div class="col-md-6 column">
         <h2>Dovecot</h2>
         <pre class="pre-trans" id="dovecotconfig">
@@ -278,13 +278,26 @@ ssl_dh_parameters_length = 4096 # >Dovecot 2.2
         <br />
       </div>
 
-
+      <div class="col-md-6 column">
+        <h2>Zarafa</h2>
+        These settings can be set in /etc/zarafa/server.cfg and gateway.cfg.
+        <h3>Medium security</h3>
+        <pre class="pre-trans" id="zarafaconfig">
+server_ssl_protocols = !SSLv2 !SSLv3
+server_ssl_ciphers = ALL:!LOW:!SSLv2:!SSLv3:!EXP:!aNULL
+server_ssl_prefer_server_ciphers = yes or no
+        </pre>
+        <h3>High security</h3>
+server_ssl_protocols = !SSLv2 !SSLv3   # >= Debian 7 / CentOS 7
+server_ssl_ciphers = EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:EECDH+aRSA+RC4:EECDH EDH+aRSA:RC4:!aNULL:!eNULL:!LOW:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS
+server_ssl_prefer_server_ciphers = yes or no﻿
+        <br />
+      </div>
     </div>
   </div>
+  
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
-
-
       <div class="col-md-6 column">
         <h2>MySQL</h2>
         <pre class="pre-trans" id="mysqlconfig">
@@ -306,8 +319,6 @@ SHOW SLAVE STATUS\G;
         </pre>
         <br />
       </div>
-
-
 
       <div class="col-md-6 column">
         <h2>DirectAdmin</h2>
