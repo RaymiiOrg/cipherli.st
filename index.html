@@ -48,9 +48,7 @@
       document.getElementById("lighttpdconfig").innerHTML = 'ssl.honor-cipher-order = "enable"\n';
       document.getElementById("lighttpdconfig").innerHTML += 'ssl.cipher-list = "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH:ECDHE-RSA-AES128-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA128:DHE-RSA-AES128-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-GCM-SHA128:ECDHE-RSA-AES128-SHA384:ECDHE-RSA-AES128-SHA128:ECDHE-RSA-AES128-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES128-SHA128:DHE-RSA-AES128-SHA128:DHE-RSA-AES128-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA384:AES128-GCM-SHA128:AES128-SHA128:AES128-SHA128:AES128-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4"\n';
       document.getElementById("lighttpdconfig").innerHTML += 'ssl.use-compression = "disable"\n';
-      document.getElementById("lighttpdconfig").innerHTML += 'setenv.add-response-header = ("Strict-Transport-Security" =&gt; "max-age=63072000; <i>includeSubDomains</i>; preload")\n';
-      document.getElementById("lighttpdconfig").innerHTML += 'setenv.add-response-header = ("X-Frame-Options" =&gt; "DENY")\n';
-      document.getElementById("lighttpdconfig").innerHTML += 'setenv.add-response-header = ("X-Content-Type-Options" =&gt; "nosniff")\n';
+      document.getElementById("lighttpdconfig").innerHTML += 'setenv.add-response-header = (\n "Strict-Transport-Security" =&gt; "max-age=63072000; <i>includeSubDomains</i>; preload",\n "X-Frame-Options" =&gt; "DENY",\n "X-Content-Type-Options" =&gt; "nosniff"\n)\n';
       document.getElementById("lighttpdconfig").innerHTML += 'ssl.use-sslv2 = "disable"\n';
       document.getElementById("lighttpdconfig").innerHTML += 'ssl.use-sslv3 = "disable"\n';
 
