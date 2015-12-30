@@ -278,6 +278,14 @@ ssl_dh_parameters_length = 4096 # >Dovecot 2.2
       </div>
 
       <div class="col-md-6 column">
+          <h2>Hitch TLS Proxy</h2>
+          <pre class="pre-trans" id="hitchconfig">
+ciphers = "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH"
+prefer-server-ciphers = on
+          </pre>
+      </div>
+
+      <div class="col-md-6 column">
         <h2>Zarafa</h2>
         These settings can be set in /etc/zarafa/server.cfg and gateway.cfg.
         <h3>Medium security</h3>
