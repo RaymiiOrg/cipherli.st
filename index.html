@@ -79,9 +79,10 @@ Header always set X-Frame-Options DENY
 Header always set X-Content-Type-Options nosniff
 # Requires Apache >= 2.4
 SSLCompression off 
-SSLSessionTickets Off
 SSLUseStapling on 
 SSLStaplingCache "shmcb:logs/stapling-cache(150000)" 
+# Requires Apache >= 2.4.11
+SSLSessionTickets Off
             </pre>
             <br />
             </div>
