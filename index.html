@@ -75,7 +75,7 @@
 SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
 SSLProtocol All -SSLv2 -SSLv3
 SSLHonorCipherOrder On
-Header always set Strict-Transport-Security "max-age=63072000; <i>includeSubdomains</i>; preload"
+Header always set Strict-Transport-Security "max-age=63072000; <i>includeSubDomains</i>; preload"
 Header always set X-Frame-Options DENY
 Header always set X-Content-Type-Options nosniff
 # Requires Apache >= 2.4
@@ -100,7 +100,7 @@ ssl_stapling on; # Requires nginx >= 1.3.7
 ssl_stapling_verify on; # Requires nginx => 1.3.7
 resolver <i>$DNS-IP-1 $DNS-IP-2</i> valid=300s;
 resolver_timeout 5s;
-add_header Strict-Transport-Security "max-age=63072000; <i>includeSubdomains</i>; preload";
+add_header Strict-Transport-Security "max-age=63072000; <i>includeSubDomains</i>; preload";
 add_header X-Frame-Options DENY;
 add_header X-Content-Type-Options nosniff;
                 </pre><br />
@@ -112,7 +112,7 @@ ssl.honor-cipher-order = "enable"
 ssl.cipher-list = "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH"
 ssl.use-compression = "disable"
 setenv.add-response-header = (
-    "Strict-Transport-Security" =&gt; "max-age=63072000; <i>includeSubdomains</i>; preload",
+    "Strict-Transport-Security" =&gt; "max-age=63072000; <i>includeSubDomains</i>; preload",
     "X-Frame-Options" =&gt; "DENY",
     "X-Content-Type-Options" =&gt; "nosniff"
 )
@@ -205,7 +205,7 @@ frontend https-in
     option forwardfor
     option http-server-close
     option httpclose
-    rspadd Strict-Transport-Security:\ max-age=31536000;\ includeSubdomains;\ preload
+    rspadd Strict-Transport-Security:\ max-age=31536000;\ includeSubDomains;\ preload
     rspadd X-Frame-Options:\ DENY
     bind 192.0.2.10:443 ssl crt /etc/haproxy/haproxy.pem ciphers AES128+EECDH:AES128+EDH force-tlsv12 no-sslv3
         </pre>
