@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/Article">
+<head>
+  <meta property="og:image" content="https://cipherli.st/img/favicon.png">
+  <meta property="og:title" content="Cipherli.st - Strong ciphers for Apache, nginx and Lighttpd">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cipherli.st/">
+  <meta charset="utf-8">
+  <title>Cipherli.st - Strong Ciphers for Apache, nginx and Lighttpd</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cipherli.st - Strong ciphers for Apache, nginx and Lighttpd">
+  <meta name="author" content="Remy van Elst">
+  <link rel="apple-touch-icon" href="img/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" href="img/favicon.png" />
+    
+  <link href="img/favicon.png" rel="icon" type="image/png" > 
+  <link href="css/bootstrap.min.css" rel="stylesheet"> 
+  <link href="css/style.css" rel="stylesheet">
+  <script type="text/javascript" language="javascript">
+    function oldCrap() {
+      document.getElementById("apacheconfig").innerHTML = 'SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH:ECDHE-RSA-AES128-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA128:DHE-RSA-AES128-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-GCM-SHA128:ECDHE-RSA-AES128-SHA384:ECDHE-RSA-AES128-SHA128:ECDHE-RSA-AES128-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES128-SHA128:DHE-RSA-AES128-SHA128:DHE-RSA-AES128-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA384:AES128-GCM-SHA128:AES128-SHA128:AES128-SHA128:AES128-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4 \n';
+      document.getElementById("apacheconfig").innerHTML += 'SSLProtocol All -SSLv2 -SSLv3\n';
+      document.getElementById("apacheconfig").innerHTML += 'SSLHonorCipherOrder On\n';
+      document.getElementById("apacheconfig").innerHTML += 'Header always set Strict-Transport-Security "max-age=63072000; <i>includeSubdomains</i>; preload"\n';
+      document.getElementById("apacheconfig").innerHTML += 'Header always set X-Frame-Options DENY\n';
+      document.getElementById("apacheconfig").innerHTML += 'Header always set X-Content-Type-Options nosniff\n';
+      document.getElementById("apacheconfig").innerHTML += '# Requires Apache >= 2.4 \n';
+      document.getElementById("apacheconfig").innerHTML += 'SSLCompression off\n';
+      document.getElementById("apacheconfig").innerHTML += 'SSLSessionTickets Off \n';
+      document.getElementById("apacheconfig").innerHTML += 'SSLUseStapling on \n';
+      document.getElementById("apacheconfig").innerHTML += 'SSLStaplingCache "shmcb:logs/stapling-cache(150000)\"\n';
+
+
+      document.getElementById("nginxconfig").innerHTML = 'ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH:ECDHE-RSA-AES128-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA128:DHE-RSA-AES128-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-GCM-SHA128:ECDHE-RSA-AES128-SHA384:ECDHE-RSA-AES128-SHA128:ECDHE-RSA-AES128-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES128-SHA128:DHE-RSA-AES128-SHA128:DHE-RSA-AES128-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA384:AES128-GCM-SHA128:AES128-SHA128:AES128-SHA128:AES128-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4";\n';
+      document.getElementById("nginxconfig").innerHTML += 'ssl_protocols TLSv1 TLSv1.1 TLSv1.2;\n';
+      document.getElementById("nginxconfig").innerHTML += 'ssl_prefer_server_ciphers on;\n';
+      document.getElementById("nginxconfig").innerHTML += 'ssl_session_cache shared:SSL:10m;\n';
+      document.getElementById("nginxconfig").innerHTML += '# \'always\' requires nginx >= 1.7.5, see http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header'
+      document.getElementById("nginxconfig").innerHTML += 'add_header Strict-Transport-Security "max-age=63072000; <i>includeSubdomains</i>; preload" always;\n';
+      document.getElementById("nginxconfig").innerHTML += 'add_header X-Frame-Options DENY always;\n';
+      document.getElementById("nginxconfig").innerHTML += 'add_header X-Content-Type-Options nosniff always;\n';
+      document.getElementById("nginxconfig").innerHTML += 'ssl_session_tickets off;\n';
+      document.getElementById("nginxconfig").innerHTML += 'ssl_stapling on; # Requires nginx >= 1.3.7\n';
+      document.getElementById("nginxconfig").innerHTML += 'ssl_stapling_verify on; # Requires nginx >= 1.3.7\n';
+      document.getElementById("nginxconfig").innerHTML += 'resolver <i>$DNS-IP-1 $DNS-IP-2</i> valid=300s;\n';
+      document.getElementById("nginxconfig").innerHTML += 'resolver_timeout 5s;\n';
+
+
+      document.getElementById("lighttpdconfig").innerHTML = 'ssl.honor-cipher-order = "enable"\n';
+      document.getElementById("lighttpdconfig").innerHTML += 'ssl.cipher-list = "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH:ECDHE-RSA-AES128-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA128:DHE-RSA-AES128-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-GCM-SHA128:ECDHE-RSA-AES128-SHA384:ECDHE-RSA-AES128-SHA128:ECDHE-RSA-AES128-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES128-SHA128:DHE-RSA-AES128-SHA128:DHE-RSA-AES128-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA384:AES128-GCM-SHA128:AES128-SHA128:AES128-SHA128:AES128-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4"\n';
+      document.getElementById("lighttpdconfig").innerHTML += 'ssl.use-compression = "disable"\n';
+      document.getElementById("lighttpdconfig").innerHTML += 'setenv.add-response-header = (\n "Strict-Transport-Security" =&gt; "max-age=63072000; <i>includeSubDomains</i>; preload",\n "X-Frame-Options" =&gt; "DENY",\n "X-Content-Type-Options" =&gt; "nosniff"\n)\n';
+      document.getElementById("lighttpdconfig").innerHTML += 'ssl.use-sslv2 = "disable"\n';
+      document.getElementById("lighttpdconfig").innerHTML += 'ssl.use-sslv3 = "disable"\n';
+
+      document.getElementById("oldcrap").innerHTML = '\n<br><a onclick="location.reload(true); return false;">Give me the other settings</a>\n';
+
+    }
+  </script>
+</head>
+
+<body>
+    <a id="top-of-page"></a>
+    <div class="container-fluid ">
+        <div class="row"><div class="col-md-10 col-md-offset-1">
+            <div class="page-header" >
+                <h1>
+                    <img class="pull-left" src="img/lock.png" width="50" height="70" alt="Cute" /><br />Cipherli.st 
+            <small>Strong Ciphers for Apache, nginx and Lighttpd</small>
+                </h1>
+            </div>
+            <div class="col-md-4 column">
+            <h2>Apache</h2>
+            <pre class="pre-trans" id="apacheconfig">
+SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
+SSLProtocol All -SSLv2 -SSLv3
+SSLHonorCipherOrder On
+Header always set Strict-Transport-Security "max-age=63072000; <i>includeSubDomains</i>; preload"
+Header always set X-Frame-Options DENY
+Header always set X-Content-Type-Options nosniff
+# Requires Apache >= 2.4
+SSLCompression off 
+SSLUseStapling on 
+SSLStaplingCache "shmcb:logs/stapling-cache(150000)" 
+# Requires Apache >= 2.4.11
+SSLSessionTickets Off
+            </pre>
+            <br />
+            </div>
+            <div class="col-md-4 column">
+            <h2>nginx</h2>
+                <pre class="pre-trans" id="nginxconfig">
+ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+ssl_prefer_server_ciphers on;
+ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
+ssl_ecdh_curve secp384r1; # Requires nginx >= 1.1.0
+ssl_session_cache shared:SSL:10m;
+ssl_session_tickets off; # Requires nginx >= 1.5.9
+ssl_stapling on; # Requires nginx >= 1.3.7
+ssl_stapling_verify on; # Requires nginx => 1.3.7
+resolver <i>$DNS-IP-1 $DNS-IP-2</i> valid=300s;
+resolver_timeout 5s;
+add_header Strict-Transport-Security "max-age=63072000; <i>includeSubDomains</i>; preload";
+add_header X-Frame-Options DENY;
+add_header X-Content-Type-Options nosniff;
+                </pre><br />
+            </div>
+            <div class="col-md-4 column">
+            <h2>Lighttpd</h2>
+                <pre class="pre-trans" id="lighttpdconfig">
+ssl.honor-cipher-order = "enable"
+ssl.cipher-list = "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH"
+ssl.use-compression = "disable"
+setenv.add-response-header = (
+    "Strict-Transport-Security" =&gt; "max-age=63072000; <i>includeSubDomains</i>; preload",
+    "X-Frame-Options" =&gt; "DENY",
+    "X-Content-Type-Options" =&gt; "nosniff"
+)
+ssl.use-sslv2 = "disable"
+ssl.use-sslv3 = "disable"
+            </pre><br />
+            </div>
+            </div>
+            </div>
+
+            <div class="col-md-10 col-md-offset-1">
+                <div class="col-md-4 column">
+                    <a href="https://raymii.org/s/tutorials/Strong_SSL_Security_On_Apache2.html">Rationale and tutorial on Strong SSL Security on Apache</a>
+                </div>
+                <div class="col-md-4 column">
+                    <a href="https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html">Rationale and tutorial on Strong SSL Security on nginx</a>
+                </div>
+                <div class="col-md-4 column">
+                    <a href="https://raymii.org/s/tutorials/Strong_SSL_Security_On_lighttpd.html">Rationale and tutorial on Strong SSL Security on Lighttpd</a>
+                </div>
+            </div>
+            <div class="col-md-10 col-md-offset-1" id="oldcrap">
+                <br >
+                <p>Do you need to (or are forced to) support old / legacy software like IE &lt; 9, Android &lt; 2.2 or Java &lt; 6? <a href="#" onclick="JavaScript:oldCrap(); return false;">Yes, give me a ciphersuite that works with legacy / old software.</a></p>
+            </div>
+            <div class="col-md-10 col-md-offset-1">
+              <p><a href="https://tls.so/"><h3>Test your SSL config</h3></a>.</p>
+        <h2>Warning</h2>
+        These examples are meant for sysadmins who have done this before (and sysadmins are forced to support Windows XP with IE &lt; 9, therefore des3cbc), as an easily copy-pastable example, not for newbies who have no idea what all this means. The settings are very secure, but if you don't know what you are doing might make your website and subdomains <strong>unavailable for a long, long time</strong> (see <a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security">HSTS</a>). Research what you are doing and think before you act. Hier niet poepen zegmaar. <br />
+        <strong>Other suggestions</strong>
+        <ul>
+        <li>sha256 certificates</li>
+        <li>4096-bit private key</li>
+        <li>&gt;2048 DH Pool size - <pre>openssl dhparam -out dhparams.pem 4096</pre></code></pre></li>
+        <li><a href="https://raymii.org/s/articles/HTTP_Public_Key_Pinning_Extension_HPKP.html">HTTP Public Key Pinning</a></a></li>
+        </ul>   
+            <h2>Why?</h2>
+        <a href="https://www.ssllabs.com/ssltest/analyze.html?d=cipherli.st"><img src="img/a-plus.png" alt="A+ JAAAAAAAAAA" class="pull-right"/></a>
+              The above ciphers are Copy Pastable in your nginx, Lighttpd or Apache config. These provide Strong SSL Security for all modern browsers, plus you get an A+ on the <a href="https://www.ssllabs.com/ssltest/analyze.html?d=cipherli.st">SSL Labs Test</a>. In short, they set a strong Forward Secrecy enabled ciphersuite, they disable SSLv2 and SSLv3, add HTTP Strict Transport Security and X-Frame-Deny headers and enable OCSP Stapling (except on Lighttpd, it does not support that yet).
+        <br />Using IIS? Check out <a href="https://www.nartac.com/Products/IISCrypto/Default.aspx">IIS Crypto</a>. Other software like Zeus, Tomcat? Detailed info? Read the <a href="https://wiki.mozilla.org/Security/Server_Side_TLS">Mozilla Page</a>.
+              <br />Cipherli.st is made by <a href="https://raymii.org">Remy van Elst (Raymii.org)</a> &amp; <a href="http://tnx.nl">Juerd</a> (not the server admin, suggestions to Remy or as pull request) after the idea spawned at a <a href="https://privacycafe.nl/">Privacy Cafe</a> at <a href="https://revspace.nl">Revspace</a>. The image is Public Domain from <a href="https://commons.wikimedia.org/wiki/File:Heart-padlock.svg">here</a>. Feedback <a href="https://raymii.org/s/static/About.html#contact">here please</a>. Source code <a href="https://github.com/RaymiiOrg/cipherli.st" >here</a>.
+            <div class="row" style="clear: both;">
+                <div class="col-md-4 column">
+                <h3>Tweet</h3>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://cipherli.st" data-text="Enable strong SSL Security on your site with Cipherli.st " data-size="large" data-count="none" data-hashtags="cipherlist" data-dnt="true">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                </div>
+                <div class="col-md-4 column">
+                  <h3>Facebook</h3>
+                  <a href="https://www.facebook.com/sharer.php?u=https://cipherli.st">
+                    <img src="img/dislike.png" width="150" height="80" alt="dislike this on facebook" />
+                  </a>
+                </div>
+                <div class="col-md-4 column">
+                 <h3>Google+</h3>
+                    <a href="https://plus.google.com/share?url=https://cipherli.st">
+                      <img src="img/plus.png" width="80" height="80" alt="share on Gplus" />
+                    </a>
+                </div>
+            </div>
+            <hr />  
+        </div>
+    </div>
+
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Other Software</h2>
+      
+        <p><a href="https://github.com/RaymiiOrg/cipherli.st">Pull requests for other software welcome</a></p>
+
+
+      <div class="col-md-6 column">
+        <h2>haproxy</h2>
+        <pre class="pre-trans" id="haproxyconfig">
+global
+   ssl-default-bind-options no-sslv3 no-tls-tickets force-tlsv12
+   ssl-default-bind-ciphers AES128+EECDH:AES128+EDH
+
+frontend http-in
+      mode http
+      option httplog
+      option forwardfor
+      option http-server-close
+      option httpclose
+      bind 192.0.2.10:80
+      redirect scheme https code 301 if !{ ssl_fc }
+
+frontend https-in
+    option httplog
+    option forwardfor
+    option http-server-close
+    option httpclose
+    rspadd Strict-Transport-Security:\ max-age=31536000;\ includeSubDomains;\ preload
+    rspadd X-Frame-Options:\ DENY
+    bind 192.0.2.10:443 ssl crt /etc/haproxy/haproxy.pem ciphers AES128+EECDH:AES128+EDH force-tlsv12 no-sslv3
+        </pre>
+        <br />
+      </div>
+
+
+      <div class="col-md-6 column">
+        <h2>Postfix</h2>
+        <pre class="pre-trans" id="postfixconfig">
+smtpd_use_tls=yes
+smtpd_tls_security_level = may
+smtpd_tls_auth_only = yes
+smtpd_tls_cert_file=/etc/ssl/postfix.cert
+smtpd_tls_key_file=/etc/ssl/postfix.key
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtpd_tls_mandatory_protocols = !SSLv2,!SSLv3,!TLSv1,!TLSv1.1
+smtpd_tls_protocols=!SSLv2,!SSLv3,!TLSv1,!TLSv1.1
+smtpd_tls_mandatory_ciphers = medium
+tls_medium_cipherlist = AES128+EECDH:AES128+EDH
+        </pre>
+        <br />
+      </div>
+
+
+      <div class="col-md-6 column">
+        <h2>Exim</h2>
+        <pre class="pre-trans" id="eximconfig">
+tls_certificate = /etc/exim.cert
+tls_privatekey = /etc/exim.key
+tls_advertise_hosts = *
+tls_require_ciphers = AES128+EECDH:AES128+EDH
+openssl_options = +no_sslv2 +no_sslv3
+        </pre>
+        <br />
+      </div>
+      
+      <hr>
+
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+
+      <div class="col-md-6 column">
+        <h2>ProFTPd</h2>
+        <pre class="pre-trans" id="proftpdconfig">
+TLSEngine on
+TLSLog /var/ftpd/tls.log
+TLSProtocol TLSv1.2
+TLSRequired on
+TLSCipherSuite AES128+EECDH:AES128+EDH
+TLSRSACertificateFile /etc/proftpd.cert
+TLSRSACertificateKeyFile /etc/proftpd.key
+        </pre>
+        <br />
+      </div>
+
+      <div class="col-md-6 column">
+        <h2>Dovecot</h2>
+        <pre class="pre-trans" id="dovecotconfig">
+ssl = yes
+ssl_cert = &lt;/etc/dovecot.cert
+ssl_key = &lt;/etc/dovecot.key
+ssl_protocols = !SSLv2 !SSLv3
+ssl_cipher_list = AES128+EECDH:AES128+EDH
+ssl_prefer_server_ciphers = yes # >Dovecot 2.2.6
+ssl_dh_parameters_length = 4096 # >Dovecot 2.2
+        </pre>
+        <br />
+      </div>
+
+      <div class="col-md-6 column">
+          <h2>Hitch TLS Proxy</h2>
+          <pre class="pre-trans" id="hitchconfig">
+ciphers = "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH"
+prefer-server-ciphers = on
+          </pre>
+      </div>
+
+      <div class="col-md-6 column">
+        <h2>Zarafa</h2>
+        These settings can be set in /etc/zarafa/server.cfg and gateway.cfg.
+        <h3>Medium security</h3>
+        <pre class="pre-trans" id="zarafaconfig">
+server_ssl_protocols = !SSLv2 !SSLv3
+server_ssl_ciphers = ALL:!LOW:!SSLv2:!SSLv3:!EXP:!aNULL
+server_ssl_prefer_server_ciphers = yes or no
+        </pre>
+        <h3>High security</h3>
+        <pre class="pre-trans" id="zarafahighconfig">
+server_ssl_protocols = !SSLv2 !SSLv3   # >= Debian 7 / CentOS 7
+server_ssl_ciphers = EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EECDH+aRSA+SHA256:EECDH+aRSA+RC4:EECDH EDH+aRSA:RC4:!aNULL:!eNULL:!LOW:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS
+server_ssl_prefer_server_ciphers = yes or no
+        </pre>
+        <br />
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="col-md-6 column">
+        <h2>MySQL</h2>
+        <pre class="pre-trans" id="mysqlconfig">
+[mysqld]
+ssl-ca=/etc/mysql-ssl/ca-cert.pem
+ssl-cert=/etc/mysql-ssl/server-cert.pem
+ssl-key=/etc/mysql-ssl/server-key.pem
+ssl-cipher=AES128+EECDH:AES128+EDH
+# replication:
+GRANT REPLICATION SLAVE ON *.* to ‘repl’@’%’ REQUIRE SSL;
+STOP SLAVE;
+CHANGE MASTER MASTER_SSL=1,
+MASTER_SSL_CA=’/etc/mysql-ssl/ca-cert.pem’,
+MASTER_SSL_CERT=’/etc/mysql-ssl/client-cert.pem’,
+MASTER_SSL_KEY=’/etc/mysql-ssl/client-key.pem';
+SHOW SLAVE STATUS\G;
+START SLAVE;
+SHOW SLAVE STATUS\G;
+        </pre>
+        <br />
+      </div>
+
+      <div class="col-md-6 column">
+        <h2>DirectAdmin</h2>
+        <pre class="pre-trans" id="directadminconfig">
+ssl_cipher=AES128+EECDH:AES128+EDH
+SSL=1
+cacert=/usr/local/directadmin/conf/cacert.pem
+cakey=/usr/local/directadmin/conf/cakey.pem
+carootcert=/usr/local/directadmin/conf/carootcert.pem
+        </pre>
+        <br />
+      </div>
+
+
+      <div class="col-md-6 column">
+        <h2>Postgresql</h2>
+        <pre class="pre-trans" id="postgresconfig">
+ssl = on   
+ssl_ciphers = 'AES128+EECDH:AES128+EDH'  
+password_encryption = on
+        </pre>
+        <br />
+      </div>
+      
+      <div class="col-md-6 column">
+        <h2><a href="https://stribika.github.io/2015/01/04/secure-secure-shell.html">OpenSSH Server</a></a></h2>
+        <pre class="pre-trans" id="sshdconfig">
+Protocol 2
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostKey /etc/ssh/ssh_host_rsa_key
+KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com
+        </pre>
+        <br />
+      </div>
+      
+      <div class="col-md-6 column">
+        <h2><a href="https://stribika.github.io/2015/01/04/secure-secure-shell.html">OpenSSH Client</a></a></h2>
+        <pre class="pre-trans" id="sshconfig">
+HashKnownHosts yes
+Host github.com
+    MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-128-etm@openssh.com,hmac-sha2-512
+Host *
+  ConnectTimeout 30
+  KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+  MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com
+  Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+  ServerAliveInterval 10
+  ControlMaster auto
+  ControlPersist yes
+  ControlPath ~/.ssh/socket-%r@%h:%p
+        </pre>
+        <br />
+      </div>
+      
+       
+      <div class="col-md-6 column">
+        <h2><a href="https://blog.bracelab.com/achieving-perfect-ssl-labs-score-with-go">Golang Server</a></a></h2>
+        <pre class="pre-trans" id="golang-server">
+package main
+
+import (
+    "crypto/tls"
+    "log"
+    "net/http"
+)
+
+func main() {
+    mux := http.NewServeMux()
+    mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+        w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
+        w.Write([]byte("This is an example server.\n"))
+    })
+    cfg := &amp;tls.Config{
+        MinVersion:               tls.VersionTLS12,
+        CurvePreferences:         []tls.CurveID{tls.CurveP521, tls.CurveP384, tls.CurveP256},
+        PreferServerCipherSuites: true,
+        CipherSuites: []uint16{
+            tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+            tls.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
+            tls.TLS_RSA_WITH_AES_256_GCM_SHA384,
+            tls.TLS_RSA_WITH_AES_256_CBC_SHA,
+        },
+    }
+    srv := &amp;http.Server{
+        Addr:         ":443",
+        Handler:      mux,
+        TLSConfig:    cfg,
+        TLSNextProto: make(map[string]func(*http.Server, *tls.Conn, http.Handler), 0),
+    }
+    log.Fatal(srv.ListenAndServeTLS("tls.crt", "tls.key"))
+}
+        </pre>
+        <br />
+      </div>
+      
+
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://hosted-oswa.org/piwik/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 33]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+    g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="http://hosted-oswa.org/piwik/piwik.php?idsite=33" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik pre -->
+</body>
+</html>
