@@ -12,9 +12,9 @@
   <meta name="author" content="Remy van Elst">
   <link rel="apple-touch-icon" href="img/favicon.png" />
   <link rel="apple-touch-icon-precomposed" href="img/favicon.png" />
-    
-  <link href="img/favicon.png" rel="icon" type="image/png" > 
-  <link href="css/bootstrap.min.css" rel="stylesheet"> 
+
+  <link href="img/favicon.png" rel="icon" type="image/png" >
+  <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <script type="text/javascript" language="javascript">
     function oldCrap() {
@@ -65,7 +65,7 @@
         <div class="row"><div class="col-md-10 col-md-offset-1">
             <div class="page-header" >
                 <h1>
-                    <img class="pull-left" src="img/lock.png" width="50" height="70" alt="Cute" /><br />Cipherli.st 
+                    <img class="pull-left" src="img/lock.png" width="50" height="70" alt="Cute" /><br />Cipherli.st
             <small>Strong Ciphers for Apache, nginx and Lighttpd</small>
                 </h1>
             </div>
@@ -79,9 +79,9 @@ Header always set Strict-Transport-Security "max-age=63072000; <i>includeSubDoma
 Header always set X-Frame-Options DENY
 Header always set X-Content-Type-Options nosniff
 # Requires Apache >= 2.4
-SSLCompression off 
-SSLUseStapling on 
-SSLStaplingCache "shmcb:logs/stapling-cache(150000)" 
+SSLCompression off
+SSLUseStapling on
+SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
 # Requires Apache >= 2.4.11
 SSLSessionTickets Off
             </pre>
@@ -148,7 +148,7 @@ ssl.use-sslv3 = "disable"
         <li>4096-bit private key</li>
         <li>&gt;2048 DH Pool size - <pre>openssl dhparam -out dhparams.pem 4096</pre></code></pre></li>
         <li><a href="https://raymii.org/s/articles/HTTP_Public_Key_Pinning_Extension_HPKP.html">HTTP Public Key Pinning</a></a></li>
-        </ul>   
+        </ul>
             <h2>Why?</h2>
         <a href="https://www.ssllabs.com/ssltest/analyze.html?d=cipherli.st"><img src="img/a-plus.png" alt="A+ JAAAAAAAAAA" class="pull-right"/></a>
               The above ciphers are Copy Pastable in your nginx, Lighttpd or Apache config. These provide Strong SSL Security for all modern browsers, plus you get an A+ on the <a href="https://www.ssllabs.com/ssltest/analyze.html?d=cipherli.st">SSL Labs Test</a>. In short, they set a strong Forward Secrecy enabled ciphersuite, they disable SSLv2 and SSLv3, add HTTP Strict Transport Security and X-Frame-Deny headers and enable OCSP Stapling (except on Lighttpd, it does not support that yet).
@@ -173,14 +173,14 @@ ssl.use-sslv3 = "disable"
                     </a>
                 </div>
             </div>
-            <hr />  
+            <hr />
         </div>
     </div>
 
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
       <h2>Other Software</h2>
-      
+
         <p><a href="https://github.com/RaymiiOrg/cipherli.st">Pull requests for other software welcome</a></p>
 
 
@@ -242,7 +242,7 @@ openssl_options = +no_sslv2 +no_sslv3
         </pre>
         <br />
       </div>
-      
+
       <hr>
 
 
@@ -306,7 +306,7 @@ server_ssl_prefer_server_ciphers = yes or no
       </div>
     </div>
   </div>
-  
+
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
       <div class="col-md-6 column">
@@ -353,7 +353,7 @@ password_encryption = on
         </pre>
         <br />
       </div>
-      
+
       <div class="col-md-6 column">
         <h2><a href="https://stribika.github.io/2015/01/04/secure-secure-shell.html">OpenSSH Server</a></a></h2>
         <pre class="pre-trans" id="sshdconfig">
@@ -366,7 +366,7 @@ MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-
         </pre>
         <br />
       </div>
-      
+
       <div class="col-md-6 column">
         <h2><a href="https://stribika.github.io/2015/01/04/secure-secure-shell.html">OpenSSH Client</a></a></h2>
         <pre class="pre-trans" id="sshconfig">
@@ -385,8 +385,8 @@ Host *
         </pre>
         <br />
       </div>
-      
-       
+
+
       <div class="col-md-6 column">
         <h2><a href="https://blog.bracelab.com/achieving-perfect-ssl-labs-score-with-go">Golang Server</a></a></h2>
         <pre class="pre-trans" id="golang-server">
@@ -426,7 +426,21 @@ func main() {
         </pre>
         <br />
       </div>
-      
+
+      <div class="col-md-6 column">
+        <h2><a href="https://community.openvpn.net/openvpn/wiki/Hardening">OpenVPN Server</a></a></h2>
+        <h4><a href="https://www.linode.com/docs/networking/vpn/set-up-a-hardened-openvpn-server">Additional reference</a></a></h4>
+        <pre class="pre-trans" id="openvpn-server">
+dh dh4096.pem
+tls-auth ta.key 0
+tls-version-min 1.2
+tls-cipher TLS-DHE-RSA-WITH-AES-256-GCM-SHA384:TLS-DHE-RSA-WITH-AES-256-CBC-SHA256:TLS-DHE-RSA-WITH-AES-128-GCM-SHA256:TLS-DHE-RSA-WITH-AES-128-CBC-SHA256
+cipher AES-256-CBC
+auth SHA512
+        </pre>
+        <br />
+      </div>
+
 
 <!-- Piwik -->
 <script type="text/javascript">
