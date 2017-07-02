@@ -1,0 +1,13 @@
+---
+ciphers: "AES128+EECDH:AES128+EDH"
+
+# note: this depends on the client's support.
+protocols:
+  - TLSv1.2
+  - TLSv1.1
+  - TLSv1
+
+config: |
+  ssl = on
+  ssl_ciphers = 'AES128+EECDH:AES128+EDH'
+  password_encryption = on
