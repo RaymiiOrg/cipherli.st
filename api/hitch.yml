@@ -1,0 +1,11 @@
+---
+ciphers: "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH"
+
+protocols:
+  - TLSv1.2
+  - TLSv1.1
+  - TLSv1
+
+config: |
+  ciphers = "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH"
+  prefer-server-ciphers = on
