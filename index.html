@@ -193,6 +193,7 @@ ssl.use-sslv3 = "disable"
 global
    ssl-default-bind-options no-sslv3 no-tls-tickets force-tlsv12
    ssl-default-bind-ciphers AES128+EECDH:AES128+EDH
+   tune.ssl.default-dh-param 2048
 
 frontend http-in
       mode http
