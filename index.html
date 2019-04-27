@@ -227,13 +227,13 @@ frontend https-in
       <div class="col-md-6 column">
         <h2>Postfix</h2>
         <pre class="pre-trans" id="postfixconfig">
-smtpd_use_tls=yes
+smtpd_use_tls = yes
 smtpd_tls_security_level = may
 smtpd_tls_auth_only = yes
-smtpd_tls_cert_file=/etc/ssl/postfix.cert
-smtpd_tls_key_file=/etc/ssl/postfix.key
+smtpd_tls_cert_file = /etc/ssl/postfix.cert
+smtpd_tls_key_file = /etc/ssl/postfix.key
 smtpd_tls_mandatory_protocols = !SSLv2,!SSLv3,!TLSv1,!TLSv1.1
-smtpd_tls_protocols=!SSLv2,!SSLv3,!TLSv1,!TLSv1.1
+smtpd_tls_protocols = !SSLv2,!SSLv3,!TLSv1,!TLSv1.1
 smtpd_tls_mandatory_ciphers = medium
 tls_medium_cipherlist = AES128+EECDH:AES128+EDH
 tls_preempt_cipherlist = yes
