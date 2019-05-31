@@ -283,13 +283,27 @@ ssl_dh = &lt;/etc/dhparam.pem # openssl dhparam -out /etc/dhparam.pem 4096
         </pre>
         <br />
       </div>
+  </div>
 
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
       <div class="col-md-6 column">
           <h2>Hitch TLS Proxy</h2>
           <pre class="pre-trans" id="hitchconfig">
 ciphers = "EECDH+AESGCM:EDH+AESGCM"
 prefer-server-ciphers = on
           </pre>
+      </div>
+
+      <div class="col-md-6 column">
+        <h2>Cyrus IMAP</h2>
+        <pre class="pre-trans" id="cyrusconfig">
+tls_server_cert: /etc/ssl/private/cyrus.crt
+tls_server_key: /etc/ssl/private/cyrus.key
+tls_client_ca_file: /etc/ssl/private/intermediate.pem
+tls_ciphers: EECDH+AESGCM:EDH+AESGCM
+tls_versions: tls1_2
+        </pre>
       </div>
 
       <div class="col-md-6 column">
