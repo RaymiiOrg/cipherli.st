@@ -293,6 +293,22 @@ prefer-server-ciphers = on
       </div>
 
       <div class="col-md-6 column">
+          <h2>Squid Reverse Proxy</h2>
+          <pre class="pre-trans" id="hitchconfig">https_port 443 accel defaultsite=reverse.example.com vhost \
+  cert=/etc/pki/tls/certs/star.example.com.crt \
+  key=/etc/pki/tls/private/star.example.com.key \
+  cafile=/etc/pki/tls/certs/CA.crt \
+  options=NO_SSLv2,NO_SSLv3,NO_TLSv1,NO_TLSv1_1,SINGLE_DH_USE,SINGLE_ECDH_USE,CIPHER_SERVER_PREFERENCE,No_Compression,NO_TICKET \
+  cipher=ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-GCM-SHA256:!aNULL:!eNULL:!LOW:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS:!RC4 \
+  tls-dh=prime256v1:/etc/pki/tls/certs/dhparams.pem
+
+cache_peer 192.168.0.10 parent 443 0 no-query originserver login=PASS no-digest ssl ssldomain=*.example.com
+          </pre>
+      </div>
+      
+      
+      
+      <div class="col-md-6 column">
         <h2>Zarafa</h2>
         These settings can be set in /etc/zarafa/server.cfg and gateway.cfg.
         <h3>Medium security</h3>
