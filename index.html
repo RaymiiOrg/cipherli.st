@@ -189,7 +189,7 @@ ssl.ec-curve = "secp384r1"
 
 
       <div class="col-md-6 column">
-        <h2>haproxy</h2>
+        <h2>haproxy 2.x</h2>
         <pre class="pre-trans" id="haproxyconfig">
 global
    ssl-default-bind-options no-sslv3 no-tlsv10 no-tlsv11 no-tls-tickets
@@ -210,8 +210,8 @@ frontend https-in
     option forwardfor
     option http-server-close
     option httpclose
-    rspadd Strict-Transport-Security:\ max-age=31536000;\ includeSubDomains;\ preload
-    rspadd X-Frame-Options:\ DENY
+    http-response add-header Strict-Transport-Security max-age=31536000;\ includeSubDomains;\ preload
+    http-response add-header X-Frame-Options DENY
     bind $YOUR_IP:443 ssl crt /etc/haproxy/haproxy.pem curves X25519:secp521r1:secp384r1:prime256v1 ciphers EECDH+AESGCM:EDH+AESGCM no-sslv3 no-tlsv10 no-tlsv11
         </pre>
         <br />
@@ -283,7 +283,10 @@ ssl_dh = &lt;/etc/dhparam.pem # openssl dhparam -out /etc/dhparam.pem 4096
         </pre>
         <br />
       </div>
+  </div>
 
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
       <div class="col-md-6 column">
           <h2>Hitch TLS Proxy</h2>
           <pre class="pre-trans" id="hitchconfig">
@@ -293,6 +296,16 @@ prefer-server-ciphers = on
       </div>
 
       <div class="col-md-6 column">
+        <h2>Cyrus IMAP</h2>
+        <pre class="pre-trans" id="cyrusconfig">
+tls_server_cert: /etc/ssl/private/cyrus.crt
+tls_server_key: /etc/ssl/private/cyrus.key
+tls_client_ca_file: /etc/ssl/private/intermediate.pem
+tls_ciphers: EECDH+AESGCM:EDH+AESGCM
+tls_versions: tls1_2
+        </pre>
+      </div>
+
           <h2>Squid Reverse Proxy</h2>
           <pre class="pre-trans" id="hitchconfig">https_port 443 accel defaultsite=reverse.example.com vhost \
   cert=/etc/pki/tls/certs/star.example.com.crt \
