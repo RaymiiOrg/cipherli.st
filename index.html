@@ -189,10 +189,10 @@ ssl.ec-curve = "secp384r1"
 
 
       <div class="col-md-6 column">
-        <h2>haproxy</h2>
+        <h2>haproxy 2.x</h2>
         <pre class="pre-trans" id="haproxyconfig">
 global
-   ssl-default-bind-options no-sslv3 no-tls-tickets force-tlsv12
+   ssl-default-bind-options no-sslv3 no-tlsv10 no-tlsv11 no-tls-tickets
    ssl-default-bind-ciphers EECDH+AESGCM:EDH+AESGCM
    tune.ssl.default-dh-param 2048
 
@@ -210,12 +210,9 @@ frontend https-in
     option forwardfor
     option http-server-close
     option httpclose
-    # Haproxy 2.x deprecated rspadd and requires http-response add-header instead
-    #rspadd Strict-Transport-Security:\ max-age=31536000;\ includeSubDomains;\ preload
-    #rspadd X-Frame-Options:\ DENY
     http-response add-header Strict-Transport-Security max-age=31536000;\ includeSubDomains;\ preload
     http-response add-header X-Frame-Options DENY
-    bind $YOUR_IP:443 ssl crt /etc/haproxy/haproxy.pem ciphers EECDH+AESGCM:EDH+AESGCM force-tlsv12 no-sslv3
+    bind $YOUR_IP:443 ssl crt /etc/haproxy/haproxy.pem curves X25519:secp521r1:secp384r1:prime256v1 ciphers EECDH+AESGCM:EDH+AESGCM no-sslv3 no-tlsv10 no-tlsv11
         </pre>
         <br />
       </div>
