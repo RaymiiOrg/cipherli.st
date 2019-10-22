@@ -210,8 +210,11 @@ frontend https-in
     option forwardfor
     option http-server-close
     option httpclose
-    rspadd Strict-Transport-Security:\ max-age=31536000;\ includeSubDomains;\ preload
-    rspadd X-Frame-Options:\ DENY
+    # Haproxy 2.x deprecated rspadd and requires http-response add-header instead
+    #rspadd Strict-Transport-Security:\ max-age=31536000;\ includeSubDomains;\ preload
+    #rspadd X-Frame-Options:\ DENY
+    http-response add-header Strict-Transport-Security max-age=31536000;\ includeSubDomains;\ preload
+    http-response add-header X-Frame-Options DENY
     bind $YOUR_IP:443 ssl crt /etc/haproxy/haproxy.pem ciphers EECDH+AESGCM:EDH+AESGCM force-tlsv12 no-sslv3
         </pre>
         <br />
